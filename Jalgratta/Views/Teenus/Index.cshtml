@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Jalgratta.Models.Teenus>
+@using Microsoft.AspNetCore.Identity;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Teenus</h1>
+
+
+<div class="block-left3">
+
+
+
+
+    @if (this.User.IsInRole("Admin"))
+    {
+        <p>
+            <a asp-action="Create">Lisama Uus</a>
+        </p>
+    }
+    else { }
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Info)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Hind)
+
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Info)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hind) € / min
+                    </td>
+
+                    <td>
+                        @if (this.User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.TeenusId">Muuda</a>
+                            <a asp-action="Delete" asp-route-id="@item.TeenusId">Kustuta</a>
+                        }
+                        else { }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+<div class="block-right3">
+    <div id="hoolduslite">
+        <strong style="">Toyota C-HR</strong>
+
+        <p>
+            Kõik Toyota C-HRi komponendid, alates uuenduskuuri läbinud esiosast ja lõpetades uue tagatulede disainiga, on ühtaegu elegantsed, isikupärased ja viimistletud. See modernne kupee on loodudki tavapärasest eristuma.
+        </p>
+        <p style="font-style: italic; font-size: 16px">◎ Sõidu alustamise tasu 0.50€ sisaldub hinnakalkulatsioonis.</p>
+        </>
+    </div>
+    <div id="hoolduspremium">
+        <br />
+
+        <strong style="">JEEP® COMPASS</strong>
+
+        <p>
+            Jeep® tähistab kaubamärgi sünni 80ndat aastapäeva erimudeliga, mille unikaalsed detailid võimendavad ja rõhutavad Compassi eripära ja elegantsust. 80th Anniversary erimudelit esitletakse omanäolise värvivalikuga – erivärvi rohelisena koos neutraalsete hallide viimistlusdetailidega. Uue disainiga 18″ hallid valuveljed ja led tuled paistavad silma oma värske ilmega. Lisaks sellele tõstavad 80th Anniversary embleemid esiustel ja interjööris esile selle “Limited Edition” erimudeli eksklusiivsust ja elegantsust.
+        </p>
+        <p style="font-style: italic; font-size: 16px">◎ Sõidu alustamise tasu 0.50€ sisaldub hinnakalkulatsioonis.</p>
+    </div>
+
+
+    <a href="/Teenusetelimuses/Create">
+        <button style="margin-left: 8%;">
+            <span>Rentima</span>
+        </button>
+    </a>
+</div>
